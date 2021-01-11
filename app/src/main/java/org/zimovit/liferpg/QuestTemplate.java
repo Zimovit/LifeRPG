@@ -51,9 +51,20 @@ public class QuestTemplate {
     //constructor
 
 
-    public QuestTemplate(String questName, int strength, int health, int knowledge,
+    public QuestTemplate(@NonNull String questName){
+        this.questName = questName;
+        this.strength = 0;
+        this.health = 0;
+        this.knowledge = 0;
+        this.intellect = 0;
+        this.charisma = 0;
+        this.category = SINGLE;
+        this.type = "type";
+    }
+
+    public QuestTemplate(@NonNull String questName, int strength, int health, int knowledge,
                          int intellect, int charisma, String category, String type) {
-        questName = questName;
+        this.questName = questName;
         this.strength = strength;
         this.health = health;
         this.knowledge = knowledge;

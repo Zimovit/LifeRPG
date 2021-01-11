@@ -35,7 +35,7 @@ public class OtherFragment extends ListFragment {
     private void refreshQuestList() {
         DBAsyncQuery refreshQueryList = new DBAsyncQuery();
         Log.d("qwerty", "tried to refresh");
-        refreshQueryList.execute(0);
+        refreshQueryList.execute(DBAsyncQuery.GET_ALL);
     }
 
     @Override
