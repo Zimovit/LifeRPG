@@ -51,6 +51,7 @@ public class QuestTemplate {
     //constructor
 
 
+    @Ignore
     public QuestTemplate(@NonNull String questName){
         this.questName = questName;
         this.strength = 0;

@@ -9,11 +9,13 @@ import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.ListFragment;
 
+import org.zimovit.liferpg.temp.SampleQuestSet;
+
 import java.util.List;
 
 public class OtherFragment extends ListFragment {
 
-    public static List<Quest> toDeal;
+    public static Quest[] toDeal;
     public static String [] items = new String[0];
     private static Quest [] quests;
     private static AppDatabase db;
@@ -29,13 +31,13 @@ public class OtherFragment extends ListFragment {
         setHasOptionsMenu(true);
         db = DBInstance.getInstance().getDatabase();
         dbDao = db.dbDao();
-        refreshQuestList();
+        refreshQuestList(DBAsyncQuery.GET_ALL);
     }
 
-    private void refreshQuestList() {
+    private void refreshQuestList(int code) {
         DBAsyncQuery refreshQueryList = new DBAsyncQuery();
         Log.d("qwerty", "tried to refresh");
-        refreshQueryList.execute(DBAsyncQuery.GET_ALL);
+        refreshQueryList.execute(code);
     }
 
     @Override
@@ -50,6 +52,8 @@ public class OtherFragment extends ListFragment {
 
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, items);
         setListAdapter(adapter);
+        toDeal = SampleQuestSet.generateSetOfQuests();
+        refreshQuestList(DBAsyncQuery.ADD_ALL);
     }
 
 

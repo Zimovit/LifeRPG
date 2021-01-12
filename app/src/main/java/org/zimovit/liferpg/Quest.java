@@ -2,6 +2,7 @@ package org.zimovit.liferpg;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 
 @Entity
 public class Quest extends QuestTemplate {
@@ -16,6 +17,7 @@ public class Quest extends QuestTemplate {
         timesCompleted = 0;
     }
 
+    @Ignore
     public Quest(@NonNull String questName){
         super(questName);
 

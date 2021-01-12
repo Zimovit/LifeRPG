@@ -12,6 +12,9 @@ public interface DBDao {
     @Insert
     void insertQuest(Quest quest);
 
+    @Insert
+    void insertAllQuests(Quest... quests);
+
     @Delete
     void deleteQuest(Quest quest);
 
