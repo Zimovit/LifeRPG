@@ -16,21 +16,25 @@ public class DBAsyncQuery extends AsyncTask<Integer, Void, String[]> {
     protected void onPreExecute() {
         super.onPreExecute();
         toProcess = OtherFragment.toDeal;
+        Log.d(this.getClass().getSimpleName(), "ASQ called");
 
     }
 
     @Override
     protected String[] doInBackground(Integer... integers) {
+        Log.d(this.getClass().getSimpleName(), "Background process started");
         switch (integers[0]) {
             case GET_ALL:
-                List<Quest> quests = DBInstance.getInstance().getDatabase().dbDao().getAllQuests();
+                Log.d(this.getClass().getSimpleName(), "Case Get_all");
+                List<Quest> quests = MainApp.getInstance().getDatabase().dbDao().getAllQuests();
                 result = new String[quests.size()];
                 for (int i = 0; i < quests.size(); i++){
                     result[i] = quests.get(i).questName;
                 }
                 return result;
             case ADD_ALL:
-                DBInstance.getInstance().getDatabase().dbDao().insertAllQuests(toProcess);
+                Log.d(this.getClass().getSimpleName(), "Case add_all");
+                MainApp.getInstance().getDatabase().dbDao().insertAllQuests(toProcess);
                 result = new String[toProcess.length];
                 for (int i = 0; i < toProcess.length; i++){
                     result[i] = toProcess[i].questName;
@@ -47,5 +51,6 @@ public class DBAsyncQuery extends AsyncTask<Integer, Void, String[]> {
         OtherFragment.items = questsNames;
         OtherFragment.adapter.notifyDataSetChanged();
         OtherFragment.toDeal = null;
+        Log.d(this.getClass().getSimpleName(), "ASQ finished, items array size = " + OtherFragment.items.length);
     }
 }

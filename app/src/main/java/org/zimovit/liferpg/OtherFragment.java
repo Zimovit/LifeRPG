@@ -9,14 +9,10 @@ import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.ListFragment;
 
-import org.zimovit.liferpg.temp.SampleQuestSet;
-
-import java.util.List;
-
 public class OtherFragment extends ListFragment {
 
     public static Quest[] toDeal;
-    public static String [] items = new String[0];
+    public static String [] items = {"One", "Two", "Three"};
     private static Quest [] quests;
     private static AppDatabase db;
     public static ArrayAdapter<String> adapter;
@@ -29,15 +25,16 @@ public class OtherFragment extends ListFragment {
 
         setRetainInstance(true);
         setHasOptionsMenu(true);
-        db = DBInstance.getInstance().getDatabase();
+        db = MainApp.getInstance().getDatabase();
         dbDao = db.dbDao();
-        refreshQuestList(DBAsyncQuery.GET_ALL);
+        Log.d(this.getClass().getSimpleName(), "onCreate called");
     }
 
     private void refreshQuestList(int code) {
         DBAsyncQuery refreshQueryList = new DBAsyncQuery();
-        Log.d("qwerty", "tried to refresh");
+        Log.d(this.getClass().getSimpleName(), "tried to refresh");
         refreshQueryList.execute(code);
+        Log.d(this.getClass().getSimpleName(), "Refresh AsyncTask started, code is " + code);
     }
 
     @Override
@@ -50,10 +47,16 @@ public class OtherFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, items);
-        setListAdapter(adapter);
-        toDeal = SampleQuestSet.generateSetOfQuests();
-        refreshQuestList(DBAsyncQuery.ADD_ALL);
+        if (adapter == null){
+            adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, items);
+            setListAdapter(adapter);
+        }
+        refreshQuestList(DBAsyncQuery.GET_ALL);
+
+        Log.d(this.getClass().getSimpleName(), "item array size = " + items.length);
+
+        /*toDeal = SampleQuestSet.generateSetOfQuests();
+        refreshQuestList(DBAsyncQuery.ADD_ALL);*/
     }
 
 

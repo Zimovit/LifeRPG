@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-public class DBInstance extends Application {
-    public static DBInstance instance;
+public class MainApp extends Application {
+    public static MainApp instance;
 
     private AppDatabase database;
 
@@ -17,7 +17,7 @@ public class DBInstance extends Application {
         database = Room.databaseBuilder(this, AppDatabase.class, "database").build();
     }
 
-    public static DBInstance getInstance() {
+    public static MainApp getInstance() {
         return instance;
     }
 
