@@ -9,6 +9,8 @@ public class DBAsyncQuery extends AsyncTask<Integer, Void, String[]> {
     //Queries
     public static final int GET_ALL = 0;
     public static final int ADD_ALL = 1;
+
+    private final String TAG = this.getClass().getSimpleName();
     private Quest[] toProcess;
     private String [] result;
 
@@ -29,8 +31,11 @@ public class DBAsyncQuery extends AsyncTask<Integer, Void, String[]> {
                 List<Quest> quests = MainApp.getInstance().getDatabase().dbDao().getAllQuests();
                 result = new String[quests.size()];
                 for (int i = 0; i < quests.size(); i++){
-                    result[i] = quests.get(i).questName;
+                    OtherFragment.items[i] = quests.get(i).questName;
                 }
+                Log.d(TAG, ""+OtherFragment.items.length);
+                OtherFragment.items = result;
+                Log.d(TAG, ""+OtherFragment.items.length);
                 return result;
             case ADD_ALL:
                 Log.d(this.getClass().getSimpleName(), "Case add_all");

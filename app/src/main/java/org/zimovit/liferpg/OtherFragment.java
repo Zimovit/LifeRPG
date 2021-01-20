@@ -11,8 +11,10 @@ import androidx.fragment.app.ListFragment;
 
 public class OtherFragment extends ListFragment {
 
+    private final String TAG = this.getClass().getSimpleName();
+
     public static Quest[] toDeal;
-    public static String [] items = {"One", "Two", "Three"};
+    public static String [] items = {"One", "Two", "Three","Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
     private static Quest [] quests;
     private static AppDatabase db;
     public static ArrayAdapter<String> adapter;
@@ -27,14 +29,14 @@ public class OtherFragment extends ListFragment {
         setHasOptionsMenu(true);
         db = MainApp.getInstance().getDatabase();
         dbDao = db.dbDao();
-        Log.d(this.getClass().getSimpleName(), "onCreate called");
+        Log.d(TAG, "onCreate called");
     }
 
     private void refreshQuestList(int code) {
         DBAsyncQuery refreshQueryList = new DBAsyncQuery();
-        Log.d(this.getClass().getSimpleName(), "tried to refresh");
+        Log.d(TAG, "tried to refresh");
         refreshQueryList.execute(code);
-        Log.d(this.getClass().getSimpleName(), "Refresh AsyncTask started, code is " + code);
+        Log.d(TAG, "Refresh AsyncTask started, code is " + code);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class OtherFragment extends ListFragment {
         }
         refreshQuestList(DBAsyncQuery.GET_ALL);
 
-        Log.d(this.getClass().getSimpleName(), "item array size = " + items.length);
+        Log.d(TAG, "item array size = " + items.length);
 
         /*toDeal = SampleQuestSet.generateSetOfQuests();
         refreshQuestList(DBAsyncQuery.ADD_ALL);*/
